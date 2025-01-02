@@ -9,4 +9,7 @@ import { Pokemon } from '../../models/pokemon.model';
 })
 export class PlayingCardComponent {
   @Input() pokemon = new Pokemon();
+
+  PokemonTypeIcon: string = "energy/elec.png";
+  backgroundColor: string = "rgb(255,255,104)";
 }

@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { PlayingCardComponent } from './components/playing-card/playing-card.component';
 import { Pokemon } from './models/pokemon.model';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { PokemonType } from './utils/pokemon.utils';
 
 @Component({
   selector: 'app-root',
@@ -30,12 +31,14 @@ export class AppComponent {
     pokemon1.attackDescription = "Tempte Florale inflige des dégâts à tous les Pokémon présents sur le terrain adjacents au lanceur.";
 
     const pokemon2 = new Pokemon();
-    pokemon2.name = "Elektor";
-    pokemon2.hp = 140;
-    pokemon2.figureCaption = "N°0145 Elektor";
-    pokemon2.attackName = "Cage Éclar";
-    pokemon2.attackStrength = 60;
-    pokemon2.attackDescription = "Cage Éclair paralyse la cible, Capacité Dynamax, Cage Éclair devient Gardomax.";
+    pokemon2.name = "Léviator";
+    pokemon2.image = "pokemon/leviator.jpg"
+    pokemon2.type = PokemonType.WATER;
+    pokemon2.hp = 90;
+    pokemon2.figureCaption = "N°0130 Léviator";
+    pokemon2.attackName = "Siphon";
+    pokemon2.attackStrength = 35;
+    pokemon2.attackDescription = "Siphon permet de traverser les tourbillons barrant le passage.";
 
     this.pokemons.push(pokemon1);
     this.pokemons.push(pokemon2);
