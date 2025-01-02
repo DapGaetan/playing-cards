@@ -1,9 +1,14 @@
-<div id="card-list">
-<app-search-bar (submit)="inscreaseCount()"
+<!-- <div id="card-list">
+<app-search-bar (click)="inscreaseCount()"
                 [(search)]="search"/>
 
 Search : {{ search }}
 <br>
 click count : {{count}}
     <app-playing-card [pokemon]="pokemon1"/>
+</div> -->
+
+<button (click)="togglePokemon()">Toggle Pokemon</button>
+<div id="card-list">
+    <app-playing-card [pokemon] = "pokemons[selectedPokemonIndex]"/>
 </div>
