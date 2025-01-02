@@ -12,8 +12,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 })
 export class AppComponent {
   pokemon1!: Pokemon;
-
   count: number = 0;
+  search = '';
 
   inscreaseCount(){
     this.count++;
