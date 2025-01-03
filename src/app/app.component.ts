@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PlayingCardComponent } from './components/playing-card/playing-card.component';
 import { Pokemon } from './models/pokemon.model';
@@ -16,11 +16,17 @@ export class AppComponent {
   count: number = 0;
   search = '';
 
-  selectedPokemonIndex = 1;
-  // signal 
+  selectedPokemonIndex = signal(1);
+  selectedPokemon = computed(() => {
+    return this.pokemons[this.selectedPokemonIndex()]
+  })
 
   constructor() {
 
+
+    effect(() => {
+      console.log(this.selectedPokemon())
+    })
     this.pokemons = []
 
     const pokemon1 = new Pokemon();
@@ -52,7 +58,6 @@ export class AppComponent {
   }
 
   togglePokemon(){
-    this.selectedPokemonIndex = (this.selectedPokemonIndex + 1) % this.pokemons.length;
-    // this.selectedPokemonIndex.set((this.selectedPokemonIndex() + 1) % this.pokemons.length);
+    this.selectedPokemonIndex.set((this.selectedPokemonIndex() + 1) % this.pokemons.length);
   }
 }

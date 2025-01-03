@@ -1,31 +1,31 @@
 <div id="card">
-    <div id="inside" [style.background-color]="backgroundColor">
+    <div id="inside" [style.background-color]="backgroundColor()">
         <header>
             <div class="left">
-                <div id="name">{{pokemon.name}}</div>
+                <div id="name">{{pokemon().name}}</div>
             </div>
             <div class="right">
-                <div id="hp">{{pokemon.hp}} HP</div>
-                <img class="icon energy" [src]="pokemonTypeIcon" alt="">
+                <div id="hp">{{pokemon().hp}} HP</div>
+                <img class="icon energy" [src]="pokemonTypeIcon()" alt="">
             </div>
         </header>
         <figure id="art">
-            <img [src]="pokemon.image" alt="" srcset="">
-            <figcaption>{{pokemon.figureCaption}}</figcaption>
+            <img [src]="pokemon().image" alt="" srcset="">
+            <figcaption>{{pokemon().figureCaption}}</figcaption>
         </figure>
         <div id="capacities">
             <div class="capacity">
                 <div class="main">
                     <div class="cost">
-                        <img class="energy icon" [src]="pokemonTypeIcon" alt="" srcset="">
-                        <img class="energy icon" [src]="pokemonTypeIcon" alt="" srcset="">
+                        <img class="energy icon" [src]="pokemonTypeIcon()" alt="" srcset="">
+                        <img class="energy icon" [src]="pokemonTypeIcon()" alt="" srcset="">
                     </div>
-                    <div class="name">{{pokemon.attackName}}</div>
-                    <div class="damage">{{pokemon.attackStrength}}</div>
+                    <div class="name">{{pokemon().attackName}}</div>
+                    <div class="damage">{{pokemon().attackStrength}}</div>
                 </div>
             </div>
             <div class="description">
-                {{pokemon.attackDescription}}
+                {{pokemon().attackDescription}}
             </div>
         </div>
     </div>

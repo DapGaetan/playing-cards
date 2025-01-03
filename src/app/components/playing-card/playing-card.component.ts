@@ -1,4 +1,4 @@
-import { Component, input, Input, InputSignal, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, input, Input, InputSignal, OnChanges, OnInit, SimpleChanges, computed } from '@angular/core';
 import { Pokemon } from '../../models/pokemon.model';
 import { PokemonTypeProperties } from '../../utils/pokemon.utils';
 
@@ -8,19 +8,15 @@ import { PokemonTypeProperties } from '../../utils/pokemon.utils';
   templateUrl: './playing-card.component.html',
   styleUrl: './playing-card.component.scss'
 })
-export class PlayingCardComponent implements OnChanges{
+export class PlayingCardComponent{
 
-  @Input() pokemon = new Pokemon();
+ pokemon = input(new Pokemon());
 
-  pokemonTypeIcon: string = "energy/elec.png";
-  backgroundColor: string = "rgb(255,255,104)";
+  pokemonTypeIcon = computed(() => {
+    return PokemonTypeProperties[this.pokemon().type].imageUrl;
+  });
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['pokemon']) {
-      if (changes['pokemon'].previousValue?.type != changes['pokemon'].currentValue.type) {
-        this.pokemonTypeIcon = PokemonTypeProperties[this.pokemon.type].imageUrl;
-        this.backgroundColor = PokemonTypeProperties[this.pokemon.type].color;
-      }
-    }
-  }
+  backgroundColor = computed(() => {
+    return PokemonTypeProperties[this.pokemon().type].color;
+  });
 }

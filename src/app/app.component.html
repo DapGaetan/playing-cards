@@ -10,6 +10,5 @@ click count : {{count}}
 
 <button (click)="togglePokemon()">Toggle Pokemon</button>
 <div id="card-list">
-    <app-playing-card [pokemon] = "pokemons[selectedPokemonIndex]"/>
-    <!-- <app-playing-card [pokemon] = "pokemons[selectedPokemonIndex()]"/> -->
+    <app-playing-card [pokemon] = "selectedPokemon()"/>
 </div>
