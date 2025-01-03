@@ -27,6 +27,7 @@ header{
     .right{
         flex-direction: row;
         justify-content: flex-end;
+        gap: 10px;
     }
 
     .right #hp, .right img{

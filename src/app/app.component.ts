@@ -16,7 +16,8 @@ export class AppComponent {
   count: number = 0;
   search = '';
 
-  selectedPokemonIndex = 0;
+  selectedPokemonIndex = 1;
+  // signal 
 
   constructor() {
 
@@ -24,6 +25,8 @@ export class AppComponent {
 
     const pokemon1 = new Pokemon();
     pokemon1.name = "Florizzare";
+    pokemon1.image = "pokemon/flo.jpg";
+    pokemon1.type = PokemonType.PLANT;
     pokemon1.hp = 150;
     pokemon1.figureCaption = "N°070 Florizzare";
     pokemon1.attackName = "Tempête Florale";
@@ -32,7 +35,7 @@ export class AppComponent {
 
     const pokemon2 = new Pokemon();
     pokemon2.name = "Léviator";
-    pokemon2.image = "pokemon/leviator.jpg"
+    pokemon2.image = "pokemon/leviator.jpg";
     pokemon2.type = PokemonType.WATER;
     pokemon2.hp = 90;
     pokemon2.figureCaption = "N°0130 Léviator";
@@ -50,5 +53,6 @@ export class AppComponent {
 
   togglePokemon(){
     this.selectedPokemonIndex = (this.selectedPokemonIndex + 1) % this.pokemons.length;
+    // this.selectedPokemonIndex.set((this.selectedPokemonIndex() + 1) % this.pokemons.length);
   }
 }
