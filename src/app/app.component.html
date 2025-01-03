@@ -8,7 +8,18 @@ click count : {{count}}
     <app-playing-card [pokemon]="pokemon1"/>
 </div> -->
 
-<button (click)="togglePokemon()">Toggle Pokemon</button>
+<app-search-bar [(search)]="search"/>
+
 <div id="card-list">
-    <app-playing-card [pokemon] = "selectedPokemon()"/>
+    <app-playing-card *ngFor="let pokemon of filteredPokemons()" [pokemon] = "pokemon"/>
 </div>
+<div *ngIf="filteredPokemons().length == 0; then notFound else found" class="center"></div>
+
+<ng-template #notFound>
+    No Pokemons founds !
+</ng-template>
+
+<ng-template #found>
+    <div class="center">Found {{filteredPokemons().length}} Pokemons !</div>
+</ng-template>
+
