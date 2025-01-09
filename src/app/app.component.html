@@ -1,25 +1,16 @@
-<!-- <div id="card-list">
-<app-search-bar (click)="inscreaseCount()"
-                [(search)]="search"/>
-
-Search : {{ search }}
-<br>
-click count : {{count}}
-    <app-playing-card [pokemon]="pokemon1"/>
-</div> -->
-
 <app-search-bar [(search)]="search"/>
 
 <div id="card-list">
-    <app-playing-card *ngFor="let pokemon of filteredPokemons()" [pokemon] = "pokemon"/>
+    @for (pokemon of filteredPokemons(); track pokemon.name) {
+        <app-playing-card [pokemon] = "pokemon"/>
+    }
 </div>
-<div *ngIf="filteredPokemons().length == 0; then notFound else found" class="center"></div>
 
-<ng-template #notFound>
-    No Pokemons founds !
-</ng-template>
-
-<ng-template #found>
+@if (filteredPokemons().length == 0) {
+    <div class="center">No Pokemons founds !</div>
+}@else {
     <div class="center">Found {{filteredPokemons().length}} Pokemons !</div>
-</ng-template>
+}
+
+
 
