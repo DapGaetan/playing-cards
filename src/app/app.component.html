@@ -3,12 +3,14 @@
 <div id="card-list">
     @for (pokemon of filteredPokemons(); track pokemon.name) {
         <app-playing-card [pokemon] = "pokemon"/>
+    } @empty {
+        <div class="center">No Pokemons founds !</div>
     }
 </div>
 
-@if (filteredPokemons().length == 0) {
-    <div class="center">No Pokemons founds !</div>
-}@else {
+
+
+@if (filteredPokemons().length > 0) {
     <div class="center">Found {{filteredPokemons().length}} Pokemons !</div>
 }
 
