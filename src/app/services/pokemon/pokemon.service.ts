@@ -12,9 +12,31 @@ export class PokemonService {
   currentIndex: number = 1
 
   constructor() { 
+    this.load();
+  }
+
+  private save() {
+    localStorage.setItem('pokemons', JSON.stringify(this.pokemons));
+  }
+
+  private load() {
+
+    const pokemonData = localStorage.getItem('pokemons');
+    if (pokemonData) {
+      this.pokemons = JSON.parse(pokemonData).map((pokemonJSON: any) => Object.assign(new Pokemon(), pokemonJSON));
+      this.currentIndex = Math.max(...this.pokemons.map(pokemon => pokemon.id ))
+    } else {
+      this.init();
+      this.save();
+    }
+    
+  }
+
+  private init() {
     this.pokemons = []
 
     const pokemon1 = new Pokemon();
+    pokemon1.id = this.currentIndex++;
     pokemon1.name = "Florizzare";
     pokemon1.image = "pokemon/flo.jpg";
     pokemon1.type = PokemonType.PLANT;
@@ -25,6 +47,7 @@ export class PokemonService {
     pokemon1.attackDescription = "Tempte Florale inflige des dégâts à tous les Pokémon présents sur le terrain adjacents au lanceur.";
 
     const pokemon2 = new Pokemon();
+    pokemon2.id = this.currentIndex++;
     pokemon2.name = "Léviator";
     pokemon2.image = "pokemon/leviator.jpg";
     pokemon2.type = PokemonType.WATER;
@@ -35,6 +58,7 @@ export class PokemonService {
     pokemon2.attackDescription = "Siphon permet de traverser les tourbillons barrant le passage.";
 
     const pokemon3 = new Pokemon();
+    pokemon3.id = this.currentIndex++;
     pokemon3.name = "Raichu";
     pokemon3.image = "pokemon/raichu.jpg";
     pokemon3.type = PokemonType.ELECTRIC;
@@ -45,6 +69,7 @@ export class PokemonService {
     pokemon3.attackDescription = "Éclair inflige des dégâts et a 10% de chances de paralyser la cible.";
 
     const pokemon4 = new Pokemon();
+    pokemon4.id = this.currentIndex++;
     pokemon4.name = "Dracofeu";
     pokemon4.image = "pokemon/dracofeu.jpg";
     pokemon4.type = PokemonType.FIRE;
@@ -75,6 +100,7 @@ export class PokemonService {
     pokemonCopy.id = this.currentIndex;
     this.pokemons.push(pokemonCopy.copy())
     this.currentIndex++;
+    this.save();
   
     return pokemonCopy;
 
@@ -86,6 +112,7 @@ export class PokemonService {
     const pokemonIndex = this.pokemons.findIndex(originalPokemon => originalPokemon.id === pokemon.id);
     if (pokemonIndex) {
       this.pokemons[pokemonIndex] = pokemonCopy.copy();
+      this.save();
     }
 
     return pokemonCopy;
@@ -95,6 +122,8 @@ export class PokemonService {
     const pokemonIndex = this.pokemons.findIndex(originalPokemon => originalPokemon.id === id);
     if(pokemonIndex != -1){
       this.pokemons.splice(pokemonIndex, 1);
+      this.currentIndex++;
+      this.save();
     }
   }
 

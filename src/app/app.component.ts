@@ -3,7 +3,6 @@ import { Component, computed, inject, model, signal } from '@angular/core';
 import { PlayingCardComponent } from './components/playing-card/playing-card.component';
 import { Pokemon } from './models/pokemon.model';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { PokemonType } from './utils/pokemon.utils';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,14 +15,20 @@ export class AppComponent {
 
   PokemonService = inject(PokemonService);
 
-  pokemons!: Pokemon[];
+  pokemons = signal<Pokemon[]>([]);
   search = model('');
 
   filteredPokemons = computed(() => {
-    return this.pokemons.filter(pokemon => pokemon.name.includes(this.search()))
+    return this.pokemons().filter(pokemon => pokemon.name.includes(this.search()))
   })
 
   constructor() { 
-    this.pokemons = this.PokemonService.getAll();
+    this.pokemons.set(this.PokemonService.getAll());
+   }
+
+   addPokemon() {
+    const genericPokemon = new Pokemon();
+    this.PokemonService.add(genericPokemon);
+    this.pokemons.set(this.PokemonService.getAll());
    }
 }
