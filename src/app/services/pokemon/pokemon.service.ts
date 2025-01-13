@@ -122,7 +122,6 @@ export class PokemonService {
     const pokemonIndex = this.pokemons.findIndex(originalPokemon => originalPokemon.id === id);
     if(pokemonIndex != -1){
       this.pokemons.splice(pokemonIndex, 1);
-      this.currentIndex++;
       this.save();
     }
   }

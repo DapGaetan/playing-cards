@@ -1,0 +1,20 @@
+<app-search-bar [(search)]="search"/>
+
+<div id="card-list">
+    @for (pokemon of filteredPokemons(); track pokemon.name) {
+        <app-playing-card [pokemon] = "pokemon"/>
+    } @empty {
+        <div class="center">No Pokemons founds !</div>
+    }
+</div>
+
+
+
+@if (filteredPokemons().length > 0) {
+    <div class="center">Found {{filteredPokemons().length}} Pokemons !</div>
+}
+
+<div class="center"><button (click)="addPokemon()">Add Generic Pokemon</button></div>
+
+
+
