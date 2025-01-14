@@ -1,6 +1,7 @@
-@if (pokemonId()) {
-    <p>pokemon {{pokemonId()}}</p>
-    <button (click)="next()">Next</button>
-} @else {
-    <p>monster works !</p>
-}
+<form (submit)="submit($event)">
+    <div class="form-field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" [formControl]="name">
+    </div>
+    <button type="submit" [disabled]="name.invalid">Save</button>
+</form>
