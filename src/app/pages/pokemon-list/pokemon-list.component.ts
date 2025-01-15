@@ -28,9 +28,6 @@ export class PokemonListComponent {
    }
 
    addPokemon() {
-    const genericPokemon = new Pokemon();
-    this.pokemonService.add(genericPokemon);
-    this.pokemons.set(this.pokemonService.getAll());
     this.router.navigate(['pokemon']);
    }
 

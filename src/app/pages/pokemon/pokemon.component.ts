@@ -22,7 +22,6 @@ export class PokemonComponent implements OnInit, OnDestroy{
   private pokemonService = inject(PokemonService);
   private routeSubscription: Subscription | null = null;
   private formValuesSubscription:Subscription | null = null;
-  pokemonId = -1;
   
   formGroup = this.fb.group({
     name: ['', Validators.required],
@@ -37,12 +36,12 @@ export class PokemonComponent implements OnInit, OnDestroy{
 
   pokemon: Pokemon = Object.assign(new Pokemon(), this.formGroup.value);
   pokemonTypes = Object.values(PokemonType);
-  // pokemonId = signal<number | undefined>(undefined)
+  pokemonId = -1;
 
   ngOnInit(): void {
     this.formValuesSubscription = this.formGroup.valueChanges.subscribe(data => {
-      this.pokemon = Object.assign(new Pokemon(), data)
-    })
+      this.pokemon = Object.assign(new Pokemon(), data);
+    });
     this.routeSubscription = this.route.params.subscribe(params => {
       if (params['id']) {
         this.pokemonId = parseInt(params['id']);
@@ -54,12 +53,6 @@ export class PokemonComponent implements OnInit, OnDestroy{
       }
     });
   }
-
-  // next() {
-  //   let nextId = this.pokemonId() || 0;
-  //   nextId++;
-  //   this.router.navigate(['/monster/' + nextId])
-  // }
 
   ngOnDestroy(): void {
     this.formValuesSubscription?.unsubscribe();

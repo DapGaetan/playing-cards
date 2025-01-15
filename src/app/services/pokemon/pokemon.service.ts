@@ -98,12 +98,10 @@ export class PokemonService {
     const pokemonCopy = pokemon.copy();
 
     pokemonCopy.id = this.currentIndex;
-    this.pokemons.push(pokemonCopy.copy())
     this.currentIndex++;
     this.save();
   
     return pokemonCopy;
-
   }
 
   update(pokemon: Pokemon): Pokemon {

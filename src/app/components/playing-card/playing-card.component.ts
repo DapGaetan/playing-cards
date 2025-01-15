@@ -1,4 +1,4 @@
-import { Component, input, Input, InputSignal, OnChanges, OnInit, SimpleChanges, computed } from '@angular/core';
+import { Component, input, computed } from '@angular/core';
 import { Pokemon } from '../../models/pokemon.model';
 import { PokemonTypeProperties } from '../../utils/pokemon.utils';
 
