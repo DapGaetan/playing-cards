@@ -18,8 +18,8 @@
         }
         </mat-form-field>
         <div class="form-field">
-            <label for="image">Image</label>
-            <input id="image" name="image" type="file" (change)="onFileChange($event)">
+            <button mat-raised-button type="button" (click)="imageInput.click()">Upload file : {{ imageInput.files?.[0]?.name || '...' }}</button>
+            <input hidden #imageInput id="image" name="image" type="file" (change)="onFileChange($event)">
         @if (isFieldValid("image")) {
             <div class="error">This field is required</div>
         }
