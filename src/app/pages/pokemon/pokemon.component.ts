@@ -8,10 +8,11 @@ import { Pokemon } from '../../models/pokemon.model';
 import { PokemonService } from '../../services/pokemon/pokemon.service';
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-pokemon',
-  imports: [ReactiveFormsModule, PlayingCardComponent, MatButtonModule, MatInputModule],
+  imports: [ReactiveFormsModule, PlayingCardComponent, MatButtonModule, MatInputModule, MatSelectModule],
   templateUrl: './pokemon.component.html',
   styleUrl: './pokemon.component.scss'
 })

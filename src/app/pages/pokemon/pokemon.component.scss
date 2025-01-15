@@ -1,5 +1,13 @@
 form {
     max-width: 500px;
+    margin: 20px;
+    padding: 20px;
+    background-color: rgb(73, 49, 65);
+    border-radius: 10px;
+}
+
+mat-form-field{
+    width: 100%;
 }
 
 .form-field{
