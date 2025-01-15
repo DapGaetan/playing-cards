@@ -6,10 +6,12 @@ import { PokemonType } from '../../utils/pokemon.utils';
 import { PlayingCardComponent } from '../../components/playing-card/playing-card.component';
 import { Pokemon } from '../../models/pokemon.model';
 import { PokemonService } from '../../services/pokemon/pokemon.service';
+import { MatButtonModule } from '@angular/material/button'
+import { MatInputModule } from '@angular/material/input'
 
 @Component({
   selector: 'app-pokemon',
-  imports: [ReactiveFormsModule, PlayingCardComponent],
+  imports: [ReactiveFormsModule, PlayingCardComponent, MatButtonModule, MatInputModule],
   templateUrl: './pokemon.component.html',
   styleUrl: './pokemon.component.scss'
 })
