@@ -11,3 +11,26 @@ form {
 label{
     font-size: small;
 }
+
+.ng-dirty.ng-invalid, .ng-touched.ng-invalid {
+    border-color: red;
+    border-width: 1px;
+}
+
+.error {
+    font-size: x-small;
+    color: red;
+}
+
+.preview, main{
+    display: inline-block;
+}
+
+.preview {
+    width: 300px;
+    margin: 20px;
+}
+
+.main{
+    width: calc(100% - 340px);
+}
