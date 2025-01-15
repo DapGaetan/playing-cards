@@ -1,3 +1,9 @@
+<!-- @if (pokemonId()) {
+    <p>pokemon {{pokemonId()}} !</p>
+    <button (click)="next()">Next</button>
+} @else {
+    <p>pokemon works !</p>
+} -->
 <div class="preview">
     <app-playing-card [pokemon]="pokemon"></app-playing-card>
 </div>
@@ -73,7 +79,10 @@
             <div class="error">This field is required</div>
         }
         </div>
-    
-        <button type="submit" [disabled]="formGroup.invalid">Save</button>
+        <div class="button-container">
+            <button (click)="navigateBack()">Back</button>
+            <button type="submit" [disabled]="formGroup.invalid">Save</button>
+
+        </div>
     </form>
 </div>

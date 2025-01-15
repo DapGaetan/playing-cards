@@ -4,6 +4,7 @@ import { PokemonService } from '../../services/pokemon/pokemon.service';
 import { CommonModule } from '@angular/common';
 import { PlayingCardComponent } from '../../components/playing-card/playing-card.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -12,7 +13,8 @@ import { SearchBarComponent } from '../../components/search-bar/search-bar.compo
   styleUrl: './pokemon-list.component.scss'
 })
 export class PokemonListComponent {
-  PokemonService = inject(PokemonService);
+  private pokemonService = inject(PokemonService);
+  private router = inject(Router);
 
   pokemons = signal<Pokemon[]>([]);
   search = model('');
@@ -22,12 +24,17 @@ export class PokemonListComponent {
   })
 
   constructor() { 
-    this.pokemons.set(this.PokemonService.getAll());
+    this.pokemons.set(this.pokemonService.getAll());
    }
 
    addPokemon() {
     const genericPokemon = new Pokemon();
-    this.PokemonService.add(genericPokemon);
-    this.pokemons.set(this.PokemonService.getAll());
+    this.pokemonService.add(genericPokemon);
+    this.pokemons.set(this.pokemonService.getAll());
+    this.router.navigate(['pokemon']);
+   }
+
+   openPokemon(pokemon: Pokemon) {
+    this.router.navigate(['pokemon', pokemon.id])
    }
 }

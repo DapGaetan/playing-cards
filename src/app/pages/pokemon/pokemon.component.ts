@@ -1,5 +1,5 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PokemonType } from '../../utils/pokemon.utils';
@@ -13,14 +13,16 @@ import { PokemonService } from '../../services/pokemon/pokemon.service';
   templateUrl: './pokemon.component.html',
   styleUrl: './pokemon.component.scss'
 })
+
 export class PokemonComponent implements OnInit, OnDestroy{
   
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private fb = inject(FormBuilder);
   private pokemonService = inject(PokemonService);
-
   private routeSubscription: Subscription | null = null;
   private formValuesSubscription:Subscription | null = null;
+  pokemonId = -1;
   
   formGroup = this.fb.group({
     name: ['', Validators.required],
@@ -35,15 +37,15 @@ export class PokemonComponent implements OnInit, OnDestroy{
 
   pokemon: Pokemon = Object.assign(new Pokemon(), this.formGroup.value);
   pokemonTypes = Object.values(PokemonType);
-  pokemonId = -1
+  // pokemonId = signal<number | undefined>(undefined)
 
   ngOnInit(): void {
     this.formValuesSubscription = this.formGroup.valueChanges.subscribe(data => {
       this.pokemon = Object.assign(new Pokemon(), data)
     })
     this.routeSubscription = this.route.params.subscribe(params => {
-      if (params['pokemon']) {
-        this.pokemonId = parseInt(params['pokemon']);
+      if (params['id']) {
+        this.pokemonId = parseInt(params['id']);
         const pokemonFound = this.pokemonService.get(this.pokemonId);
         if (pokemonFound) {
           this.pokemon = pokemonFound;
@@ -53,6 +55,12 @@ export class PokemonComponent implements OnInit, OnDestroy{
     });
   }
 
+  // next() {
+  //   let nextId = this.pokemonId() || 0;
+  //   nextId++;
+  //   this.router.navigate(['/monster/' + nextId])
+  // }
+
   ngOnDestroy(): void {
     this.formValuesSubscription?.unsubscribe();
     this.routeSubscription?.unsubscribe();
@@ -60,7 +68,17 @@ export class PokemonComponent implements OnInit, OnDestroy{
 
   submit(event: Event) {
     event.preventDefault();
-    console.log(this.formGroup.value);
+    if (this.pokemonId === -1) {
+      this.pokemonService.add(this.pokemon);
+    } else {
+      this.pokemon.id = this.pokemonId;
+      this.pokemonService.update(this.pokemon);
+    }
+    this.navigateBack();
+  }
+
+  navigateBack() {
+    this.router.navigate(['/home'])
   }
 
   isFieldValid(name: string) {

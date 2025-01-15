@@ -1,8 +1,8 @@
 <app-search-bar [(search)]="search"/>
 
 <div id="card-list">
-    @for (pokemon of filteredPokemons(); track pokemon.name) {
-        <app-playing-card [pokemon] = "pokemon"/>
+    @for (pokemon of filteredPokemons(); track pokemon) {
+        <app-playing-card [pokemon] = "pokemon" (click)="openPokemon(pokemon)"/>
     } @empty {
         <div class="center">No Pokemons founds !</div>
     }
@@ -14,7 +14,7 @@
     <div class="center">Found {{filteredPokemons().length}} Pokemons !</div>
 }
 
-<div class="center"><button (click)="addPokemon()">Add Generic Pokemon</button></div>
+<div class="center"><button (click)="addPokemon()">Add Pokemon</button></div>
 
 
 

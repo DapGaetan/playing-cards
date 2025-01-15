@@ -110,7 +110,7 @@ export class PokemonService {
     const pokemonCopy = pokemon.copy();
 
     const pokemonIndex = this.pokemons.findIndex(originalPokemon => originalPokemon.id === pokemon.id);
-    if (pokemonIndex) {
+    if (pokemonIndex != -1) {
       this.pokemons[pokemonIndex] = pokemonCopy.copy();
       this.save();
     }
