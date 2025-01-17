@@ -9,6 +9,8 @@ import { PokemonService } from '../../services/pokemon/pokemon.service';
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import {MatSelectModule} from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { DeletePokemonConfirmationDialogComponent } from '../../components/delete-pokemon-confirmation-dialog/delete-pokemon-confirmation-dialog.component';
 
 @Component({
   selector: 'app-pokemon',
@@ -25,6 +27,7 @@ export class PokemonComponent implements OnInit, OnDestroy{
   private pokemonService = inject(PokemonService);
   private routeSubscription: Subscription | null = null;
   private formValuesSubscription:Subscription | null = null;
+  private readonly dialog = inject(MatDialog);
   
   formGroup = this.fb.group({
     name: ['', Validators.required],
@@ -81,6 +84,16 @@ export class PokemonComponent implements OnInit, OnDestroy{
     const formControl = this.formGroup.get(name);
     return formControl?.invalid && (formControl?.dirty || formControl?.touched)
 
+  }
+
+  deletePokemon() {
+    const dialogsRef = this.dialog.open(DeletePokemonConfirmationDialogComponent);
+    dialogsRef.afterClosed().subscribe(confirmation => {
+      if (confirmation) {
+        this.pokemonService.delete(this.pokemonId);
+        this.navigateBack();
+      }
+    })
   }
 
   onFileChange(event: any) {

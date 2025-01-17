@@ -43,7 +43,11 @@ label{
     width: calc(100% - 340px);
 }
 
-.button-container {
+.button-container.bottom .button-container.top{
     display: flex;
     gap: 10px;
+}
+
+.button-container.top {
+    margin-top: 5px;
 }

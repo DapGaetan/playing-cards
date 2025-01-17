@@ -1,9 +1,3 @@
-<!-- @if (pokemonId()) {
-    <p>pokemon {{pokemonId()}} !</p>
-    <button (click)="next()">Next</button>
-} @else {
-    <p>pokemon works !</p>
-} -->
 <div class="preview">
     <app-playing-card [pokemon]="pokemon"></app-playing-card>
 </div>
@@ -79,10 +73,13 @@
             <div class="error">This field is required</div>
         }
         </mat-form-field>
-        <div class="button-container">
+        <div class="button-container top">
+            <button mat-flat-button color="warn" type="" (click)="deletePokemon()">Delete</button>
+        </div>
+        <br>
+        <div class="button-container bottom">
             <button mat-button (click)="navigateBack()">Back</button>
             <button mat-flat-button type="submit" [disabled]="formGroup.invalid">Save</button>
-
         </div>
     </form>
 </div>
