@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { PokemonListComponent } from './pages/pokemon-list/pokemon-list.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [{
     path: '',
@@ -11,6 +12,10 @@ export const routes: Routes = [{
 {
     path: 'home', 
     component: PokemonListComponent,
+},
+{
+    path: 'login', 
+    component: LoginComponent,
 },
 {
     path: 'pokemon',
